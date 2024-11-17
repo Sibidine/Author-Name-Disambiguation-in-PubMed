@@ -740,7 +740,7 @@ bert_embedding = BertEmbeddings('bert-base-uncased')
 model = [bert_embedding]
 
 def cosine_embedding(sentence1, sentence2, model):
-    embeddings = DocumentPoolEmbeddings(model, mode='mean')
+    embeddings = DocumentPoolEmbeddings(model, pooling='mean')
     s1 = Sentence(sentence1)
     s2 = Sentence(sentence2)
     e1 = embeddings.embed(s1)
@@ -748,7 +748,9 @@ def cosine_embedding(sentence1, sentence2, model):
     v1 = s1.get_embedding()
     v2 = s2.get_embedding()
     #print(v1, v2)   #check that you don't get empty tensors
-
+    if v1.requires_grad or v2.requires_grad:
+      v1 = v1.detach()
+      v2 = v2.detach()
     cos_sim = dot(v1, v2)/(norm(v1)*norm(v2))
     #print(cos_sim)
     return cos_sim                       #lies in [-1, 1].
