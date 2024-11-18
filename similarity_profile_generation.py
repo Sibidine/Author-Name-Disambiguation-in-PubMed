@@ -849,7 +849,9 @@ if __name__ == "__main__":
 
     for author in range(0, len(authorlist)):
         author_file = f"author_features/{authorlist[author]}"  # Path to the author's file
-        author_xls_file = author_file.replace(".xlsx", ".xls")  # Corresponding .xls file name
+        author_file_alt = f"Similarity_profile/{authorlist[author]}
+
+        author_xls_file = author_file_alt.replace(".xlsx", ".xls")  # Corresponding .xls file name
 
         # Check if the .xls file already exists
         if os.path.exists(author_xls_file):
