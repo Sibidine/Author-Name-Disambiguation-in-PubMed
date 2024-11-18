@@ -844,26 +844,36 @@ def main(authorname):
 
 
 if __name__ == "__main__":
-    print("Total No of Author: ",len(authorlist))
-    print("\nFor Tracking: Author1_Row_in_Excel, Author1_PMID, Author2_Row_in_Excel,  Author2_PMID, Author_Lname_FirstInitial, No of Record are printed")
-    for author in range(0,len(authorlist)):
-        
-        global rb 
-        print(author, "author_features/"+authorlist[author])
-        rb = open_workbook("author_features/"+authorlist[author])
+    print("Total No of Authors: ", len(authorlist))
+    print("\nFor Tracking: Author1_Row_in_Excel, Author1_PMID, Author2_Row_in_Excel, Author2_PMID, Author_Lname_FirstInitial, No of Record are printed")
+
+    for author in range(0, len(authorlist)):
+        author_file = f"author_features/{authorlist[author]}"  # Path to the author's file
+        author_xls_file = author_file.replace(".xlsx", ".xls")  # Corresponding .xls file name
+
+        # Check if the .xls file already exists
+        if os.path.exists(author_xls_file):
+            print(f"Skipping {authorlist[author]} as .xls file already exists.")
+            continue
+
+        print(author, author_file)
+
+        global rb
+        rb = open_workbook(author_file)
         global sheet
         sheet = rb.sheet_by_name('Sheet')
         global data
         data = [[sheet.cell_value(r, c) for c in range(sheet.ncols)] for r in range(sheet.nrows)]
-        
-        for i in range(0,len(data)):
-            for j in range(0,len(data[0])):
-                if(type(data[i][j])!=type("sgskh")):
-                    r=0
+
+        for i in range(0, len(data)):
+            for j in range(0, len(data[0])):
+                if type(data[i][j]) != type("sgskh"):
+                    r = 0
                 else:
-                    if(j==11):
+                    if j == 11:
                         affmesh = "Meshterm cannot be lowered"
-                    else:    
-                        data[i][j]=data[i][j].lower()
-        
+                    else:
+                        data[i][j] = data[i][j].lower()
+
+        # Call the main function if .xls file does not exist
         main(authorlist[author])    
