@@ -14,7 +14,7 @@ with open("config.json") as json_file:
 
 OUTPUT_PATH=''	
 for files in parsed_json:
-	if(files['python_file']==os.path.realpath(__file__).split("\\")[-1]):
+	if(files['python_file']=='GBT_Validation_And_Testing.py'):
 		OUTPUT_PATH = files['xlsxfile']
         
 #6 7 3 4 5 1 2 1
@@ -69,7 +69,7 @@ def evaluate(model, test_features, test_labels):
       
 def main():
 
-    dataset = pd.read_csv(OUTPUT_PATH, encoding = "ISO-8859-1", error_bad_lines=False)
+    dataset = pd.read_csv(OUTPUT_PATH, encoding = "ISO-8859-1", on_bad_lines='skip')
     #dataset_statistics(dataset)
     train_x, test_x, train_y, test_y = split_dataset(dataset, 0.7, HEADERS[2:target_index], HEADERS[target_index])
 
