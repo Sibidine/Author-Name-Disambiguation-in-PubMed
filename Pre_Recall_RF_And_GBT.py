@@ -15,7 +15,7 @@ with open("config.json") as json_file:
 
 OUTPUT_PATH=''	
 for files in parsed_json:
-	if(files['python_file']=="Pre_Recall_RF_And_GBT.py":
+	if files['python_file']=="Pre_Recall_RF_And_GBT.py":
 		OUTPUT_PATH = files['xlsxfile']
         
 #5 7 3 4 5 1 2 1
@@ -197,7 +197,7 @@ def getrfgbtarrayresult(dataset, modelcode):
       
 def main():
 
-    dataset = pd.read_csv(OUTPUT_PATH, encoding = "ISO-8859-1", error_bad_lines=False)
+    dataset = pd.read_csv(OUTPUT_PATH, encoding = "ISO-8859-1", on_bad_lines='skip')
     
     thresholdarray = []
     for i in range(0,11, 1):
@@ -216,6 +216,7 @@ def main():
     leg.get_frame().set_edgecolor('k') 
     plt.xlabel('Threshold') 
     plt.ylabel('Performance')
+    plt.show()
     
 if __name__ == "__main__":
     main()    
