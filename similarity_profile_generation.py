@@ -581,25 +581,25 @@ def jour_lang_idf(langA,langB):
 def jour_year(yearA, yearB):
     if(yearA=='' or yearB==''):
         return 5
-    yearA = yearA.split()
-    yearB = yearB.split()
-    if(int(yearA[0]) < 1988 and int(yearB[0]) < 1988):
+    yearA = yearA
+    yearB = yearB
+    if(int(yearA) < 1988 and int(yearB) < 1988):
         return 0
-    elif((int(yearA[0]) < 1988 and int(yearB[0]) >= 1988) or (int(yearA[0]) >= 1988 and int(yearB[0]) < 1988) ):
+    elif((int(yearA) < 1988 and int(yearB) >= 1988) or (int(yearA) >= 1988 and int(yearB) < 1988) ):
         return 1
-    elif((int(yearA[0]) >= 1988 and int(yearB[0]) < 2002) or (int(yearA[0]) >= 1988 and int(yearB[0]) < 2002)):
+    elif((int(yearA) >= 1988 and int(yearB) < 2002) or (int(yearA) >= 1988 and int(yearB) < 2002)):
         return 2
-    elif(int(yearA[0]) >= 2002 and int(yearB[0]) >= 2002):
+    elif(int(yearA) >= 2002 and int(yearB) >= 2002):
         return 4
-    elif((int(yearA[0]) >= 1988 and int(yearB[0]) >= 2002) or (int(yearA[0]) >= 1988 and int(yearB[0]) >= 2002)):
+    elif((int(yearA) >= 1988 and int(yearB) >= 2002) or (int(yearA) >= 1988 and int(yearB) >= 2002)):
         return 3
 
 def jour_year_diff(yearA,yearB):
     if(yearA=='' or yearB==''):
         return 0
-    yearA = yearA.split()
-    yearB = yearB.split()
-    return abs(int(yearA[0])-int(yearB[0]))    
+    yearA = yearA
+    yearB = yearB
+    return abs(int(yearA)-int(yearB))    
 
 def title_shared_jac(titleA,titleB):
     common = list(common_elements(titleA,titleB))
@@ -863,7 +863,7 @@ if __name__ == "__main__":
         global rb
         rb = open_workbook(author_file)
         global sheet
-        sheet = rb.sheet_by_name('Sheet')
+        sheet = rb.sheet_by_name('Sheet1')
         global data
         data = [[sheet.cell_value(r, c) for c in range(sheet.ncols)] for r in range(sheet.nrows)]
 
