@@ -342,8 +342,8 @@ def coauth_lname_jac(coauthorA,coauthorB,comlen):
         return 0
     coauthorA = coauthorA.split('||')
     coauthorB = coauthorB.split('||')
-    coauthorA.pop(len(coauthorA)-1)
-    coauthorB.pop(len(coauthorB)-1)
+    # coauthorA.pop(len(coauthorA)-1)
+    # coauthorB.pop(len(coauthorB)-1)
     return ( comlen / (len(coauthorA) + len(coauthorB) ) )
 
 def coauth_lnamefi_jac(coauthorA,coauthorB):
@@ -351,8 +351,8 @@ def coauth_lnamefi_jac(coauthorA,coauthorB):
         return 0
     coauthorA = coauthorA.split('||')
     coauthorB = coauthorB.split('||')
-    coauthorA.pop(len(coauthorA)-1)
-    coauthorB.pop(len(coauthorB)-1)
+    # coauthorA.pop(len(coauthorA)-1)
+    # coauthorB.pop(len(coauthorB)-1)
     common = list(common_elements(coauthorA,coauthorB))
     return ( len(common) / (len(coauthorA) + len(coauthorB) ) )
 
@@ -576,7 +576,7 @@ def jour_lang_idf(langA,langB):
     else:
         #print(klang.get('langtotal'), klang.get(llangA), llangA)
         langidf = int(klang.get('langtotal'))/klang.get(llangA)
-        return math.log(langidf)
+        return langidf
 
 def jour_year(yearA, yearB):
     if(yearA=='' or yearB==''):
@@ -782,7 +782,7 @@ def main(authorname):
     i=0
     save = 0
     if i==0:
-        for i in range(0,len(data)):
+        for i in range(0,1):
             j=i+1
             for j in range(i+1,len(data)):
                 # for tracking purpose
@@ -823,7 +823,7 @@ def main(authorname):
                 
                 same=0
                 #print(orcid1 , orcid2 , orcid1==orcid2)
-                if(orcid1=="no" or orcid2=="no"):
+                if(orcid1!=orcid2):
                     same=0
                 # if anyone of them is matches
                 # orcid is there in two form XXXX-XXXX-XXXX-XXXX or http://orcid.org/XXXX-XXXX-XXXX-XXXX
